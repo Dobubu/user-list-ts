@@ -11,18 +11,20 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
         a.nav-link(href='#') {{item.title}}
     ul.navbar-nav.ml-auto
       li.nav-item
-        a.nav-link(href='#') {{msg}}
+        a.nav-link(href='#') {{msg}} {{foo}}
 
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Inject, Emit, Vue } from 'vue-property-decorator';
 import { Menu } from '@/lib/menu'
 
 @Component
 export default class AppMenu extends Vue {
   @Prop({default:'xxx'}) 
   msg!: string;
+
+  @Inject() foo!: string
 
   menuList = [{
     title: 'Home',
@@ -35,8 +37,13 @@ export default class AppMenu extends Vue {
     id: 3
   }]
 
+  @Emit()
   send(info: Menu) {
-    this.$emit('send', info)
+    return info
   }
+
+  // send(info: Menu) {
+  //   this.$emit('send', info)
+  // }
 }
 </script>
