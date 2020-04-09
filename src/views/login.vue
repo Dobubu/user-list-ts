@@ -42,7 +42,7 @@ export default class Login extends Vue {
 
 <style lang="scss" scoped>
 .wrap {
-    height: 100vh;
+    height: calc(100vh - 200px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +56,9 @@ export default class Login extends Vue {
             input {
                 margin-bottom: 0.5em;
             }
+        }
+        p {
+          color: #DB7307;
         }
     }
 }
