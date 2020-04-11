@@ -1,22 +1,28 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+const routes: RouteConfig[] = [
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('../views/Login.vue')
-  }, {
     path: '/',
+    name: 'Login',
+    component: async () => import('../views/Login.vue'),
+  },
+  {
+    path: '/userList',
     name: 'UserList',
-    component: () => import('../views/UserList.vue')
-  }
-]
+    component: async () => import('../views/UserList.vue'),
+  },
+  {
+    path: '/draw',
+    name: 'Draw',
+    component: async () => import('../views/draw.vue'),
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

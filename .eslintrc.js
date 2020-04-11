@@ -1,19 +1,22 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended'
-  ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 2020
+    project: ['./tsconfig.json'],
   },
+  extends: ['@yoyoys/vue-typescript-prettier-airbnb'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'indent': ['error', 2]
-  }
-}
+    '@typescript-eslint/no-unnecessary-condition': ['error', { ignoreRhs: true }],
+  },
+  overrides: [
+    {
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
+};
