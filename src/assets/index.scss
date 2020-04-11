@@ -1,18 +1,21 @@
 @import "./bootstrap/variables";
 
-@import "~bootswatch/dist/solar/variables";
-// @import "~bootswatch/dist/solar/bootswatch";
+// @import "~bootstrap/scss/functions";
+// @import "~bootstrap/scss/variables";
+// @import "~bootstrap/scss/mixins";
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/mixins";
+@import "~bootswatch/dist/Sketchy/variables";
 
 @import "~bootstrap";
 // @import "~bootstrap/scss/forms";
 // @import "~bootstrap/scss/buttons";
 // @import "~bootstrap/scss/toasts";
 // @import "~bootstrap/scss/close";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/utilities";
 
 @import '~bootstrap-vue/src/index.scss';
+
+@import "~bootswatch/dist/Sketchy/bootswatch";
 
 @import 'default'

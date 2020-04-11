@@ -1,14 +1,13 @@
 <template lang="pug">
 .wrap
-  .login
-    .content.text-center
+  .login.text-center
+    h1.mb-5 Login
+    .content
       input.form-control(v-model='form.account', placeholder='account')
       input.form-control(v-model='form.password', placeholder='password')
       button.btn.btn-primary(@click='submit') submit
-      p
-        | use
-        br
-        | account: test, password: 111
+      blockquote.blockquote.text-center
+        p account: test, password: 111
 </template>
 
 <script lang="ts">
@@ -26,11 +25,21 @@ export default class Login extends Vue {
     try {
       const res = await login(this.form);
 
-      this.$bvToast.toast(res, {
-        title: res,
-        autoHideDelay: 1000,
-        // appendToast: false
-      });
+      if (res === 'Success') {
+        this.$bvToast.toast(res, {
+          title: `Login ${res}`,
+          autoHideDelay: 1000,
+          variant: 'success',
+          toaster: 'b-toaster-top-center',
+        });
+      } else {
+        this.$bvToast.toast(res, {
+          title: `Login ${res}`,
+          autoHideDelay: 1000,
+          variant: 'danger',
+          toaster: 'b-toaster-top-center',
+        });
+      }
 
       // this.$router.push('/draw')
     } catch (e) {
@@ -42,12 +51,15 @@ export default class Login extends Vue {
 
 <style lang="scss" scoped>
 .wrap {
-  height: calc(100vh - 200px);
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 16px;
   .login {
+    h1 {
+      font-size: 5.5em;
+    }
     .head {
       font-size: 2em;
     }
@@ -58,7 +70,7 @@ export default class Login extends Vue {
       }
     }
     p {
-      color: #db7307;
+      color: #374b35;
     }
   }
 }

@@ -1,5 +1,30 @@
 <template lang="pug">
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+  router-link(
+    to='/'
+    class='navbar-brand'
+  ) Home
+  button.navbar-toggler(
+    type='button'
+    data-toggle='collapse'
+    data-target='#navbarColor03'
+    aria-controls='navbarColor03'
+    aria-expanded='false'
+    aria-label='Toggle navigation'
+  )
+    span.navbar-toggler-icon
+  #navbarColor03.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item(
+        v-for="item in menuList"
+        :key="item.id"
+      )
+        router-link(
+          :to='item.path'
+          class='nav-link'
+        ) {{ item.title }}
+
+//- nav.navbar.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href="/") Home
   button.navbar-toggler(
     type="button"
@@ -38,16 +63,14 @@ export default class AppMenu extends Vue {
 
   menuList: Menu[] = [
     {
-      title: 'Home',
       id: 1,
+      title: 'UserList',
+      path: '/userList',
     },
     {
-      title: 'Features',
       id: 2,
-    },
-    {
-      title: 'Pricing',
-      id: 3,
+      title: 'Content',
+      path: '',
     },
   ];
 

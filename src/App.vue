@@ -1,9 +1,11 @@
 <template lang="pug">
 #app
-  AppMenu(:msg='msg', @send='changeText')
-  router-view
-  p.text-center {{path}}
-  p.text-center {{menuInfo}}
+  div(v-if='isAuth')
+    AppMenu(:msg='msg', @send='changeText')
+    router-view
+    p.text-center {{path}}
+    p.text-center {{menuInfo}}
+  router-view(v-else)
 </template>
 
 <script lang="ts">
@@ -28,6 +30,10 @@ export default class MyComponent extends Vue {
 
   changeText(payload: Menu) {
     this.menuInfo = payload;
+  }
+
+  get isAuth() {
+    return localStorage.getItem('authInfo');
   }
 
   mounted() {
