@@ -6,11 +6,6 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
   ) Home
   button.navbar-toggler(
     type='button'
-    data-toggle='collapse'
-    data-target='#navbarColor03'
-    aria-controls='navbarColor03'
-    aria-expanded='false'
-    aria-label='Toggle navigation'
   )
     span.navbar-toggler-icon
   #navbarColor03.collapse.navbar-collapse
@@ -23,6 +18,11 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
           :to='item.path'
           class='nav-link'
         ) {{ item.title }}
+    //- form.form-inline.my-2.my-lg-0
+      button.btn.btn-secondary.my-2.my-sm-0(
+        @click='logout'
+      ) logout
+
 
 //- nav.navbar.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href="/") Home
@@ -82,5 +82,15 @@ export default class AppMenu extends Vue {
   send(info: Menu) {
     this.$emit('send', info);
   }
+
+  logout() {
+    this.$router.push('/');
+    localStorage.clear();
+  }
 }
 </script>
+<style lang="scss" scoped>
+.bg-light {
+  background: #374b35 !important;
+}
+</style>

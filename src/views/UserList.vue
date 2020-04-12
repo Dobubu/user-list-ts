@@ -100,3 +100,21 @@ export default class UserList extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+table {
+  th,
+  td {
+    background-color: inherit;
+    border: none;
+  }
+  th {
+    font-weight: bold;
+    color: #458766;
+    font-size: 1.3em;
+  }
+  color: #458766;
+  input {
+    color: #458766;
+  }
+}
+</style>

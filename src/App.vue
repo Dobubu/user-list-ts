@@ -2,9 +2,10 @@
 #app
   div(v-if='isAuth')
     AppMenu(:msg='msg', @send='changeText')
-    router-view
-    p.text-center {{path}}
-    p.text-center {{menuInfo}}
+    .container
+      p.text-center {{path}}
+      router-view
+      //- p.text-center {{menuInfo}}
   router-view(v-else)
 </template>
 
@@ -12,6 +13,7 @@
 import { Component, Provide, Watch, Vue } from 'vue-property-decorator';
 import AppMenu from '@/components/AppMenu.vue';
 import { Menu } from '@/lib/menu';
+import moment from 'moment';
 
 @Component({ components: { AppMenu } })
 export default class MyComponent extends Vue {
@@ -41,3 +43,8 @@ export default class MyComponent extends Vue {
   }
 }
 </script>
+<style lang="scss" scoped>
+.container {
+  margin-top: 7em;
+}
+</style>
