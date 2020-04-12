@@ -25,4 +25,13 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const isAuth = JSON.parse(localStorage.getItem('authInfo') || '{}');
+  if (to.name === 'Login' && isAuth.account) {
+    next('/userList');
+  } else {
+    next();
+  }
+});
+
 export default router;

@@ -30,18 +30,33 @@
         td(v-show='item.edited')
           button.btn.btn-danger.mr-2(@click='cancel(item, index)') Cancel
           button.btn.btn-primary(@click='save(item, index)') Save
+  b-pagination(
+    class='float-right'
+    v-model='currentPage'
+    :total-rows='total'
+    :per-page='perPage'
+    @input='goPage'
+  )
+
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { User, UserForm } from '@/lib/user';
 import cloneDeep from 'lodash/fp/cloneDeep';
+import chunk from 'lodash/fp/chunk';
 
 import faker from 'faker';
 
 @Component
 export default class UserList extends Vue {
   items: UserForm[] = [];
+
+  paginationItems: any[] = [];
+
+  currentPage = 1;
+
+  perPage = 10;
 
   total = 15;
 
@@ -72,30 +87,39 @@ export default class UserList extends Vue {
       loading: false,
     });
 
-    return users.map(formate);
+    return chunk(this.perPage, users.map(formate));
+  }
+
+  goPage() {
+    this.paginationItems = JSON.parse(localStorage.getItem('userlist') || '{}');
+    this.items = this.paginationItems[this.currentPage - 1];
   }
 
   update(item: User, i: number) {
-    this.items[i].edited = true;
+    this.paginationItems[this.currentPage - 1][i].edited = true;
   }
 
   cancel(item: User, i: number) {
-    this.items[i].edited = false;
-    this.items[i].form = cloneDeep(this.items[i].original);
+    this.paginationItems[this.currentPage - 1][i].edited = false;
+    this.paginationItems[this.currentPage - 1][i].form = cloneDeep(
+      this.paginationItems[this.currentPage - 1][i].original,
+    );
   }
 
   save(item: User, i: number) {
-    this.items[i].edited = false;
-    this.items[i].original = cloneDeep(this.items[i].form);
-    localStorage.setItem('userlist', JSON.stringify(this.items));
+    this.paginationItems[this.currentPage - 1][i].edited = false;
+    this.paginationItems[this.currentPage - 1][i].original = cloneDeep(
+      this.paginationItems[this.currentPage - 1][i].form,
+    );
+    localStorage.setItem('userlist', JSON.stringify(this.paginationItems));
   }
 
   mounted() {
     if (localStorage.getItem('userlist')) {
-      this.items = JSON.parse(localStorage.getItem('userlist') || '{}');
+      this.goPage();
     } else {
-      this.items = this.getUsers();
-      localStorage.setItem('userlist', JSON.stringify(this.items));
+      localStorage.setItem('userlist', JSON.stringify(this.getUsers()));
+      this.goPage();
     }
   }
 }

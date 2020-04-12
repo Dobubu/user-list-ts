@@ -45,6 +45,6 @@ export default class MyComponent extends Vue {
 </script>
 <style lang="scss" scoped>
 .container {
-  margin-top: 7em;
+  margin-top: 5.5em;
 }
 </style>
