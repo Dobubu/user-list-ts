@@ -1,19 +1,18 @@
 <template lang="pug">
 #app
-  div(v-if='isAuth')
+  div(v-if="$route.path !== '/'")
     AppMenu(:msg='msg', @send='changeText')
     .container
-      p.text-center {{path}}
+
       router-view
       //- p.text-center {{menuInfo}}
   router-view(v-else)
 </template>
 
 <script lang="ts">
-import { Component, Provide, Watch, Vue } from 'vue-property-decorator';
+import { Component, Provide, Vue } from 'vue-property-decorator';
 import AppMenu from '@/components/AppMenu.vue';
 import { Menu } from '@/lib/menu';
-import moment from 'moment';
 
 @Component({ components: { AppMenu } })
 export default class MyComponent extends Vue {
@@ -21,14 +20,7 @@ export default class MyComponent extends Vue {
 
   menuInfo = {};
 
-  path = '';
-
   @Provide() foo = 'provide foo';
-
-  @Watch('$route', { immediate: true, deep: true })
-  onUrlChange(newVal: any) {
-    this.path = newVal.path;
-  }
 
   changeText(payload: Menu) {
     this.menuInfo = payload;

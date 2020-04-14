@@ -1,28 +1,29 @@
 <template lang="pug">
-nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
-  router-link(
-    to='/'
-    class='navbar-brand'
-  ) Home
-  button.navbar-toggler(
-    type='button'
-  )
-    span.navbar-toggler-icon
-  #navbarColor03.collapse.navbar-collapse
-    ul.navbar-nav.mr-auto
-      li.nav-item(
-        v-for="item in menuList"
-        :key="item.id"
-      )
-        router-link(
-          :to='item.path'
-          class='nav-link'
-        ) {{ item.title }}
-    //- form.form-inline.my-2.my-lg-0
-      button.btn.btn-secondary.my-2.my-sm-0(
-        @click='logout'
-      ) logout
-
+div
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
+    router-link(
+      to='/'
+      class='navbar-brand'
+    ) Home
+    button.navbar-toggler(
+      type='button'
+    )
+      span.navbar-toggler-icon
+    #navbarColor03.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item(
+          v-for="item in menuList"
+          :key="item.id"
+        )
+          router-link(
+            :to='item.path'
+            class='nav-link'
+          ) {{ item.title }}
+      form.form-inline.my-2.my-lg-0
+        p.text-center Name
+        button.btn.btn-secondary.my-2.my-sm-0(
+          @click='logout'
+        ) logout
 
 //- nav.navbar.navbar-expand-lg.navbar-light.bg-light
   a.navbar-brand(href="/") Home
@@ -50,7 +51,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.fixed-top
 </template>
 
 <script lang="ts">
-import { Component, Prop, Inject, Emit, Vue } from 'vue-property-decorator';
+import { Component, Prop, Inject, Emit, Watch, Vue } from 'vue-property-decorator';
 import { Menu } from '@/lib/menu';
 
 @Component
@@ -73,6 +74,13 @@ export default class AppMenu extends Vue {
       path: '',
     },
   ];
+
+  path = '';
+
+  @Watch('$route', { immediate: true, deep: true })
+  onUrlChange(newVal: any) {
+    this.path = newVal.path;
+  }
 
   // @Emit()
   // send(info: Menu) {

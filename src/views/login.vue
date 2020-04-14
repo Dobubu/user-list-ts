@@ -3,9 +3,9 @@
   .login.text-center
     h1.mb-5 Login
     .content
-      input.form-control(v-model='form.account', placeholder='account')
-      input.form-control(v-model='form.password', placeholder='password')
-      button.btn.btn-primary(@click='submit') submit
+      input.form-control(v-model="form.account" placeholder="account")
+      input.form-control(v-model="form.password" placeholder="password")
+      button.btn.btn-primary(@click="submit") submit
       blockquote.blockquote.text-center.mt-5
         p
           | Any Account
@@ -36,7 +36,7 @@ export default class Login extends Vue {
       if (res === 'Success') {
         this.$bvToast.toast(res, {
           title: `Login ${res}`,
-          autoHideDelay: 1000,
+          autoHideDelay: 1500,
           variant: 'success',
           toaster: 'b-toaster-top-center',
         });
@@ -45,7 +45,7 @@ export default class Login extends Vue {
       } else {
         this.$bvToast.toast(res, {
           title: `Login ${res}`,
-          autoHideDelay: 1000,
+          autoHideDelay: 1500,
           variant: 'danger',
           toaster: 'b-toaster-top-center',
         });
@@ -55,7 +55,7 @@ export default class Login extends Vue {
       // this.$toastHandle('Error', e.message, 'danger')
       this.$bvToast.toast(e.message, {
         title: 'Error',
-        autoHideDelay: 1000,
+        autoHideDelay: 1500,
         variant: 'danger',
         toaster: 'b-toaster-top-center',
       });
