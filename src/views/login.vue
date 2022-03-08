@@ -1,11 +1,11 @@
 <template lang="pug">
-.wrap
+form.wrap(@submit.prevent="submit")
   .login.text-center
     h1.mb-5 Login
     .content
       input.form-control(v-model="form.account" placeholder="account")
       input.form-control(v-model="form.password" placeholder="password")
-      button.btn.btn-primary(@click="submit") submit
+      button.btn.btn-primary(type="submit") submit
       blockquote.blockquote.text-center.mt-5
         p
           | Any Account

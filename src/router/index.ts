@@ -7,7 +7,7 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Login',
-    component: async () => import('../views/Login.vue'),
+    component: async () => import('../views/login.vue'),
   },
   {
     path: '/userList',

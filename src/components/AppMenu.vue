@@ -19,10 +19,10 @@ div
             :to='item.path'
             class='nav-link'
           ) {{ item.title }}
-      form.form-inline.my-2.my-lg-0
-        p.text-center Name
+      form.form-inline.my-2.my-lg-0(@submit.prevent="logout")
+        p.text-center.text-white.mr-3.mb-0 {{ name }}
         button.btn.btn-secondary.my-2.my-sm-0(
-          @click='logout'
+          type="submit"
         ) logout
 
 //- nav.navbar.navbar-expand-lg.navbar-light.bg-light
@@ -77,6 +77,8 @@ export default class AppMenu extends Vue {
 
   path = '';
 
+  name = '';
+
   @Watch('$route', { immediate: true, deep: true })
   onUrlChange(newVal: any) {
     this.path = newVal.path;
@@ -92,8 +94,16 @@ export default class AppMenu extends Vue {
   }
 
   logout() {
-    this.$router.push('/');
     localStorage.clear();
+    this.$router.push({ name: 'Login' }).catch(e => console.warn(e));
+  }
+
+  mounted() {
+    const userList = localStorage.getItem('authInfo');
+    if (userList) {
+      const info = JSON.parse(userList);
+      this.name = info.account;
+    }
   }
 }
 </script>
